@@ -25,7 +25,8 @@ public class ToDoListApp {
             System.out.println("1. Add Task");
             System.out.println("2. View Tasks");
             System.out.println("3. Remove Task");
-            System.out.println("4. Exit");
+            System.out.println("4. Search Task");
+            System.out.println("5. Exit");
             System.out.print("Enter choice: ");
 
             // Read user input (menu choice)
@@ -37,16 +38,18 @@ public class ToDoListApp {
                 case 1 -> addTask(scanner); // Call method to add a task
                 case 2 -> viewTasks(); // Call method to display tasks
                 case 3 -> removeTask(scanner); // Call method to remove a task
-                case 4 -> System.out.println("Exiting..."); // Exit message
+                case 4 -> searchTask(scanner); // Call method to search for a task
+                case 5 -> System.out.println("Exiting..."); // Exit message
                 default -> System.out.println("Invalid choice. Try again."); // Handle invalid input
             }
-        } while (choice != 4); // Loop until user selects option 4 (Exit)
+        } while (choice != 5); // Loop until user selects option 4 (Exit)
 
         scanner.close(); // Close scanner to prevent memory leaks
     }
 
     /**
      * Method to add a new task to the list.
+     *
      * @param scanner Scanner object for user input.
      */
     private static void addTask(Scanner scanner) {
@@ -73,6 +76,7 @@ public class ToDoListApp {
 
     /**
      * Method to remove a task from the list.
+     *
      * @param scanner Scanner object for user input.
      */
     private static void removeTask(Scanner scanner) {
@@ -90,4 +94,29 @@ public class ToDoListApp {
             System.out.println("Invalid task number."); // Handle invalid input
         }
     }
+
+    /** Method to search a task in a list
+     *
+     * @param scanner Scanner object for user input.
+     */
+
+    private static void searchTask(Scanner scanner) {
+        System.out.print("Enter the task you are searching for: ");
+        String target = scanner.next(); // Get search from the user
+
+        if (tasks.isEmpty()) { // Check if the list is empty
+            System.out.println("No tasks available.");
+        } else {
+            // Loop through the list to see if any tasks match the search
+            for (int i = 0; i < tasks.size(); i++) {
+                if (tasks.get(i).equals(target)) {
+                    System.out.println("Found: " + tasks.get(i)); // Return the task that matches
+                } else {
+                    System.out.println("Nothing matched your search."); // Handle invalid searches
+                }
+
+            }
+        }
+    }
 }
+
